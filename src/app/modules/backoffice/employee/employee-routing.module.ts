@@ -8,7 +8,6 @@ import { EmployeeDetailsComponent } from './employee-details/employee-details.co
 import { AuthGuard } from '../../../core/guards/auth.guard';
 import { NotallowedComponent } from '../notallowed/notallowed.component';
 import { EmployeeSessionComponent } from './employee-session/employee-session.component';
-import { UsersCarouselComponent } from './users-carousel/users-carousel.component';
 
 const routes: Routes = [
   {
@@ -42,9 +41,6 @@ const routes: Routes = [
     path: 'details',
     component: EmployeeDetailsComponent,
     data: { title: 'Employees Details', roles: ['ADMIN'] }
-  },{
-    path:'contacts',
-    component:UsersCarouselComponent
   }
 ];
 
