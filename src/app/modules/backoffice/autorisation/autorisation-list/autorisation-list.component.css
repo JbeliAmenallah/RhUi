@@ -1,0 +1,87 @@
+.table-container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.table-title {
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.header-actions .p-input-icon-left input {
+  width: 250px;
+  margin-right: 10px;
+}
+
+.header-actions button {
+  margin-left: 10px;
+}
+
+.custom-table {
+  min-width: 75rem;
+}
+:host >>> .p-button{
+  margin-bottom: 1%;
+}
+
+.pending-row {
+  background-color: #ffecb3; /* Light yellow */
+}
+
+.accepted-row {
+  background-color: #c8e6c9; /* Light green */
+}
+
+.rejected-row {
+  background-color: #ffcdd2; /* Light red */
+}
+
+/* Adjust table column widths */
+th {
+  text-align: left;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+  width: 20%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 20%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 15%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 15%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 30%;
+}
+
+/* Style for empty message */
+.empty-message td {
+  text-align: center;
+  padding: 10px 0;
+}
+
+

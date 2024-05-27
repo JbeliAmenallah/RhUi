@@ -1,0 +1,18 @@
+<div class="container mt-5">
+  <h1 class="gradient-text">Modifier une absence</h1>
+  <div class="section">
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="form">
+      <app-absence-form [form]="editForm"></app-absence-form>
+      <div class="row">
+        <div class="col-md-12">
+          <button type="submit" pButton label="Envoyer" class="p-button p-button-primary"></button>
+          <button type="button" pButton label="Annuler" class="p-button p-button-secondary" (click)="onCancel()"></button>
+        </div>
+      </div>
+      <div class="">
+        <p-messages [(value)]="messages" [enableService]="true" [closable]="true"></p-messages>
+        <p-toast></p-toast>
+    </div>
+    </form>
+  </div>
+</div>

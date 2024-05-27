@@ -1,0 +1,141 @@
+
+<div class="surface-section border-round px-4 py-5 md:px-6 lg:px-8 mb-4 ">
+    <ul class="list-none p-0 m-0 flex align-items-center font-medium mb-3">
+      <li>
+        <a class="text-500 no-underline line-height-3 cursor-pointer" [routerLink]="['/employee/details']">
+            <i class="pi pi-home mr-0"></i> <!-- Ajoutez cette ligne pour l'icône de maison -->
+            Application
+        </a>
+    </li>
+    
+        <li class="px-2">
+            <i class="pi pi-angle-right text-500 line-height-3"></i>
+        </li>
+        <li>
+           <a [routerLink]="['/employee/details']"> <span class="text-900 line-height-3"><i class="pi pi-user"></i> Employés</span></a>
+        </li>
+    </ul>
+    <div class="flex align-items-start flex-column lg:justify-content-between lg:flex-row">
+        <div>
+            <div class="font-medium text-3xl text-900">Employés</div>
+            <div class="flex align-items-center text-700 flex-wrap">
+                <div class="mr-5 flex align-items-center mt-3">
+                    <i class='fas fa-user-alt'></i>
+                    <span class="text-green-400"> &nbsp;{{employeeCount}} Employés</span>
+                </div>
+                <div class="mr-5 flex align-items-center mt-3">
+                    <i class='fas fa-user-cog'></i>
+                    <span class="text-green-400"> &nbsp;{{employeeCount}} Admin</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-3 lg:mt-0">
+          <a [routerLink]="['/employee/add']">  <button pButton pRipple label="+ Ajouter" class="p-button-outlined mr-2" icon="pi pi-user-plus"></button></a>
+        </div>
+    </div>
+  </div>
+<div class="table-container">
+    <p-table
+        #dt3
+        [value]="employees"
+        dataKey="contactId"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        currentPageReportTemplate="Affichage de {first} à {last} des entrées {totalRecords}"
+        [globalFilterFields]="['contactId','name', 'username', 'email', 'location', 'phone', 'fax', 'roles', 'nbEnfant', 'regime', 'chefDefamille', 'salaireDeBASE', 'numCompte', 'modeDePaiement', 'dateRecrutemnt']"
+        [tableStyle]="{ 'min-width': '75rem' }">
+    
+        <ng-template pTemplate="header">
+            <tr>
+              
+                <th>Nom et prénom</th>
+                <th>Nom d’utilisateur</th>
+                <th>Email</th>
+                <th>Emplacement</th>
+                <th>Numéro de téléphone</th>
+                <th>Roles</th>
+                <th>Nombre d’enfants</th>
+                <th>Chef de Famille</th>
+                <th>Salaire de base</th>
+                <th>Date de recrutement</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+               
+                <th>
+                    <p-columnFilter type="text" field="name"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="username"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="email"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="location"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="phone"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="roles"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="nbEnfant"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="chefDefamille"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="salaireDeBASE"></p-columnFilter>
+                </th>
+                <th>
+                    <p-columnFilter type="text" field="dateRecrutemnt"></p-columnFilter>
+                </th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee>
+            <tr>
+              
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.username }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.location }}</td>
+                <td>{{ employee.phone }}</td>
+                <td>{{ employee.roles }}</td>
+                <td>{{ employee.nbEnfant }}</td>
+                <td>{{ employee.chefDefamille ? 'Yes' : 'No' }}</td>
+                <td>{{ employee.salaireDeBASE }}</td>
+                <td>{{ employee.dateRecrutemnt | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                    <i class="pi pi-pencil" style="font-size: 1.9rem; color: rgb(98, 0, 255)"  (click)="editItem(employee)"></i>
+                    <i class="pi pi-trash" style="font-size: 1.9rem; color: rgb(255, 72, 0)" (click)="deleteItem(employee.contactId)" ></i>
+                    <i class="pi pi-info-circle" style="font-size: 1.9rem; color: rgb(0, 123, 255)" (click)="openDetails(employee)"></i>    
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="16">Aucun employé n’a été trouvé.</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-end align-items-center">
+                <div class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input #searchInput pInputText type="text" (input)="dt3.filterGlobal(searchInput.value, 'contains')" placeholder="Mot-clé de recherche" style="width: 400px;" />
+                </div>
+            </div>
+        </ng-template>
+    </p-table>
+    <p-confirmDialog header="Confirmation de suppression" icon="pi pi-info-circle"
+    acceptButtonStyleClass="p-button-danger p-button-text"
+    rejectButtonStyleClass="p-button-text p-button-text" acceptIcon="none" rejectIcon="none">
+</p-confirmDialog>
+    <p-toast></p-toast>
+</div>

@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <h2 class="table-title">Demande d'autorisation</h2>
+    <form [formGroup]="form" class="form">
+        
+        <div class="form-group">
+            <label for="startDate">Date de début :</label>
+            <p-calendar formControlName="startDate" id="startDate" class="form-control" [showIcon]="true" dateFormat="yy-mm-dd" [showTime]="true"></p-calendar>
+            <small class="p-error" *ngIf="form.get('startDate')?.touched && form.get('startDate')?.hasError('required')">Date de début est requise </small>
+        </div>
+
+        <div class="form-group">
+            <label for="endDate">Date fin :</label>
+            <p-calendar formControlName="endDate" id="endDate" class="form-control" [showIcon]="true" dateFormat="yy-mm-dd" [showTime]="true"></p-calendar>
+            <small class="p-error" *ngIf="form.get('endDate')?.touched && form.get('endDate')?.hasError('required')">Date fin est requise</small>
+        </div>
+
+        <div class="text-center">
+            <button type="button" pButton class="btn btn-primary mt-3" (click)="submitAutorisationRequest()" label="Envoyer"></button>
+        </div>
+    </form>
+</div>
+
+<div class="messages-container">
+    <div class="">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+    </div>
+</div>

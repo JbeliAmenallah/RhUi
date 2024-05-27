@@ -1,0 +1,76 @@
+<div class="container mt-5">
+    <form [formGroup]="form" class="form">
+        <div class="row">
+            <!-- Code -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="code">Code:</label>
+                    <input type="text" pInputText formControlName="code" id="code" class="form-control"/>
+                    <small class="p-error" *ngIf="form.get('code')?.touched && form.get('code')?.hasError('required')">The code is required</small>
+                </div>
+            </div>
+
+            <!-- Libele -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="libele">Libele:</label>
+                    <input type="text" pInputText formControlName="libele" id="libele" class="form-control"/>
+                    <small class="p-error" *ngIf="form.get('libele')?.touched && form.get('libele')?.hasError('required')">Le libele est requis </small>
+                </div>
+            </div>
+
+            <!-- Type -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="type">Type:</label>
+                    <p-dropdown [options]="types" formControlName="type" id="type" ></p-dropdown>
+                    <small class="p-error" *ngIf="form.get('type')?.touched && form.get('type')?.hasError('required')">The type is required</small>
+                </div>
+            </div>
+
+            <!-- A base de salaire -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="abasedesalaire">A base de salaire:</label>
+                    <p-dropdown [options]="yesNoOptions" formControlName="abasedesalaire" id="abasedesalaire" ></p-dropdown>
+                    <small class="p-error" *ngIf="form.get('abasedesalaire')?.touched && form.get('abasedesalaire')?.hasError('required')">A base de salaire is required</small>
+                </div>
+            </div>
+
+            <!-- Montant -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="montant">Montant:</label>
+                    <input type="number" pInputText formControlName="montant" id="montant" class="form-control"/>
+                    <small class="p-error" *ngIf="form.get('montant')?.touched && form.get('montant')?.hasError('required')">The montant is required</small>
+                </div>
+            </div>
+
+
+            <!-- Obligatoire -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="obligatoire">Obligatoire :</label>
+                    <p-dropdown [options]="yesNoOptions" formControlName="obligatoire" id="obligatoire" ></p-dropdown>
+
+                </div>
+            </div>
+
+            <!-- CNSS -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="cnss">Cnss:</label>
+                    <p-dropdown [options]="yesNoOptions" formControlName="cnss" id="cnss"></p-dropdown>
+                </div>
+            </div>
+
+            <!-- Impôt -->
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="impo">Impo:</label>
+                    <p-dropdown [options]="yesNoOptions" formControlName="impo" id="impo"></p-dropdown>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

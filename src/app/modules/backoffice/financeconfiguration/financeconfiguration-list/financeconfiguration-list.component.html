@@ -1,0 +1,87 @@
+<div class="table-container">
+    <h1 class="gradient-text">Liste de configuration financière</h1>
+
+    <div class=" flex justify-content-center" style="display: flex; justify-content: flex-end;">
+        <button pButton [pTooltip]="tooltipContent" tooltipPosition="bottom" label="+" routerLink="/financeconfiguration/add"></button>
+        <ng-template #tooltipContent>
+            <div class="flex align-items-center">
+                <span><b>Ajouter une configuration financière</b></span>
+            </div>
+        </ng-template>
+    </div>
+
+    <p-table
+        #dt3
+        [value]="financeConfigurations"
+        dataKey="id"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [loading]="loading"
+        [paginator]="true"
+        currentPageReportTemplate="Affichage de {first} à {last} des entrées {totalRecords}"
+        [globalFilterFields]="['cnss', 'css1', 'css2', 'css3', 'css4', 'css5', 'tva', 'irpp1', 'irpp2', 'irpp3', 'irpp4', 'irpp5']"
+        [tableStyle]="{ 'min-width': '75rem' }">
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th>CNSS</th>
+                <th>CSS 1</th>
+                <th>CSS 2 </th>
+                <th>CSS 3</th>
+                <th>CSS 4</th>
+                <th>CSS 5</th>
+                <th>TVA </th>
+                <th>IRPP 1</th>
+                <th>IRPP 2</th>
+                <th>IRPP 3</th>
+                <th>IRPP 4</th>
+                <th>IRPP 5</th>
+                <th>Déduction</th>
+                <th>Actions</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-financeConfig>
+            <tr>
+                <td>{{ financeConfig.cnss }}</td>
+                <td>{{ financeConfig.css1 }}</td>
+                <td>{{ financeConfig.css2 }}</td>
+                <td>{{ financeConfig.css3 }}</td>
+                <td>{{ financeConfig.css4 }}</td>
+                <td>{{ financeConfig.css5 }}</td>
+                <td>{{ financeConfig.tva }}</td>
+                <td>{{ financeConfig.irpp1 }}</td>
+                <td>{{ financeConfig.irpp2 }}</td>
+                <td>{{ financeConfig.irpp3 }}</td>
+                <td>{{ financeConfig.irpp4 }}</td>
+                <td>{{ financeConfig.irpp5 }}</td>
+                <td>{{ financeConfig.deduction }}</td>
+                <td></td>
+
+                <td>
+                    <i class="pi pi-pencil" style="font-size: 1.9rem; color: rgb(98, 0, 255)" (click)="editItem(financeConfig.id)"></i>
+                    <i class="pi pi-trash" style="font-size: 1.9rem; color: rgb(255, 72, 0)" (click)="deleteItem(financeConfig.id)"></i>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="13">Aucune configuration financière n’a été trouvée.</td><td></td><td></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="caption">
+            <div class="flex justify-content-end align-items-center">
+                <div class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input #searchInput pInputText type="text" (input)="dt3.filterGlobal(searchInput.value, 'contains')" placeholder="Mot-clé de recherche" style="width: 400px;" />
+                </div>
+            </div>
+        </ng-template>
+    </p-table>
+    <p-confirmDialog header="Confirmation de suppression" icon="pi pi-info-circle"
+        acceptButtonStyleClass="p-button-danger p-button-text"
+        rejectButtonStyleClass="p-button-text p-button-text" acceptIcon="pi pi-check" rejectIcon="pi pi-times">
+    </p-confirmDialog>
+    <p-toast></p-toast>
+</div>
